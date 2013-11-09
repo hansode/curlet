@@ -4,6 +4,8 @@ curlet
 [![Build Status](https://travis-ci.org/hansode/curlet.png)](https://travis-ci.org/hansode/curlet)
 
 A Bash wrapper for the Curl(1).
+=======
+Task-based Web API Client framework for Bash using Curl(1)
 
 Requirements
 ------------
