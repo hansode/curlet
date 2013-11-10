@@ -26,8 +26,8 @@ function test_query_string_opts_single() {
 }
 
 function test_query_string_opts_multi() {
-  assertEquals    "key=val&foo=bar" "$(query_string key=val foo=bar)"
-  assertNotEquals "foo=bar&key=val" "$(query_string key=val foo=bar)"
+  assertEquals    "key=val\&foo=bar" "$(query_string key=val foo=bar)"
+  assertNotEquals "foo=bar\&key=val" "$(query_string key=val foo=bar)"
 }
 
 ## shunit2
