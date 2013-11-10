@@ -92,6 +92,19 @@ function urlencode_data() {
   )
 }
 
+function query_string() {
+  # "echo $( ... )" means removing each line \n
+  local query_string=$(
+    echo $(
+      while [[ "${1}" ]]; do
+        echo ${1}
+        shift
+      done
+    )
+  )
+  echo ${query_string// /&} # "a=b c=d" => "a=b&c=d"
+}
+
 function strfile_type() {
   local key=$1
   [[ -n "${key}" ]] || { echo "[ERROR] 'key' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
