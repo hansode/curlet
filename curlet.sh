@@ -102,7 +102,7 @@ function query_string() {
       done
     )
   )
-  echo ${query_string// /&} # "a=b c=d" => "a=b&c=d"
+  echo ${query_string// /\\&} # "a=b c=d" => "a=b\&c=d"
 }
 
 function strfile_type() {
