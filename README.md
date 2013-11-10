@@ -1,4 +1,4 @@
-curlet
+Curlet
 ======
 
 [![Build Status](https://travis-ci.org/hansode/curlet.png)](https://travis-ci.org/hansode/curlet)
@@ -10,6 +10,12 @@ Requirements
 
 + bash
 + curl
+
+Curlet-based API Clients
+------------------------
+
++ [hipchat-bash](https://github.com/hansode/hipchat-bash)
++ [github-bash](https://github.com/hansode/github-bash)
 
 License
 -------
