@@ -16,6 +16,7 @@ Curlet-based API Clients
 
 + [hipchat-bash](https://github.com/hansode/hipchat-bash)
 + [github-bash](https://github.com/hansode/github-bash)
++ [zabbix-bash](https://github.com/hansode/zabbix-bash)
 
 License
 -------
