@@ -72,6 +72,12 @@ function test_extract_args_commands_same_opts() {
   assertEquals "${addpkg}"  "openssh-server openssh-clients"
 }
 
+function test_extract_args_commands_same_opts2() {
+  local addpkg=
+  extract_args --addpkg openssh-server --addpkg openssh-clients
+  assertEquals "openssh-server openssh-clients" "${addpkg}"
+}
+
 function test_extract_args_space_included() {
   local title=
   local value="foo baaar"
