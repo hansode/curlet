@@ -72,6 +72,22 @@ function test_extract_args_commands_same_opts() {
   assertEquals "${addpkg}"  "openssh-server openssh-clients"
 }
 
+function test_extract_args_space_included() {
+  local title=
+  local value="foo baaar"
+
+  extract_args --title="${value}"
+  assertEquals "${title}" "${value}"
+}
+
+function test_extract_args_space_included2() {
+  local title=
+  local value="foo baaar"
+
+  extract_args --title "${value}"
+  assertEquals "${title}" "${value}"
+}
+
 ## shunit2
 
 . ${shunit2_file}
