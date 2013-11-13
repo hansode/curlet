@@ -7,7 +7,7 @@ COMMAND_FRONTEND=${COMMAND_FRONTEND:-noninteractive} # [ interactive | nonintera
 
 function extract_args() {
   COMMAND_ARGS=
-  local arg= key= value= key_prefix=
+  local arg= key= value=
   while [[ $# != 0 ]]; do
     arg=$1 key= value=
     case "${arg}" in
