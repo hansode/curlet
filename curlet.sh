@@ -7,13 +7,14 @@ COMMAND_FRONTEND=${COMMAND_FRONTEND:-noninteractive} # [ interactive | nonintera
 
 function extract_args() {
   COMMAND_ARGS=
-  local arg= key= value=
+  local arg= key= value= value2=
   while [[ $# != 0 ]]; do
-    arg=$1 key= value=
+    arg=$1 key= value= value2=
     case "${arg}" in
     --*=*)
       key=${arg%%=*}; key=${key##--}; key=${key//-/_}
-      value=${arg##--*=}
+      value2=${arg##--*=}
+      value="${value} ${value2}"
       eval "${key}=\"${value}\""; value="\${${key}}"; value=$(eval echo ${value}); eval "${key}=\"${value## }\""
       ;;
     --*)
