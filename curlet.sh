@@ -87,7 +87,7 @@ function urlencode_data() {
   # "echo $( ... )" means removing each line \n
   echo $(
     while [[ "${1}" ]]; do
-      echo $(data_type) \"${1}\"
+      echo $(data_type) ${1}
       shift
     done
   )
