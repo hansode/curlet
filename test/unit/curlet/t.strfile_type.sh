@@ -29,7 +29,7 @@ function test_strfile_type_no_opts() {
 
 function test_strfile_type_opts_str() {
   local foo=asdf
-  assertEquals    "foo=${foo}"    "$(strfile_type foo)"
+  assertEquals    "foo='${foo}'"  "$(strfile_type foo)"
   assertNotEquals "foo=${foo}aaa" "$(strfile_type foo)"
 }
 
