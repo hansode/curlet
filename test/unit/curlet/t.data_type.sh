@@ -13,7 +13,7 @@
 ## functions
 
 function test_data_type() {
-  assertEquals "--data" "$(data_type)"
+  assertEquals "--data-urlencode" "$(data_type)"
 }
 
 ## shunit2
