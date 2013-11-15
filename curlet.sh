@@ -87,7 +87,7 @@ function urlencode_data() {
   # "echo $( ... )" means removing each line \n
   echo $(
     while [[ "${1}" ]]; do
-      echo $(data_type) ${1}
+      echo $(data_type) \"${1}\"
       shift
     done
   )
@@ -116,7 +116,7 @@ function strfile_type() {
      echo "${key}@\${${key}}"
    else
      # str: key=${key}
-     echo "${key}=\${${key}}"
+     echo ${key}=\'\${${key}}\'
    fi
   "
 }
@@ -129,9 +129,9 @@ function add_param() {
    [[ -n "\${${param_key}}" ]] || return 0
 
    case "${param_type}" in
-    string) echo   "${param_key}=\${${param_key}}" ;;
+    string) echo ${param_key}=\'\${${param_key}}\' ;;
      array) local i; for i in \${${param_key}}; do echo "${param_key}[]=\${i}"; done ;;
-   strfile) strfile_type ${param_key}            ;;
+   strfile) strfile_type \"${param_key}\" ;;
   strplain) echo "\${${param_key}}" ;;
       hash) local i; for i in \${${param_key}}; do echo \${param_key}[\${i%%=*}]=\${i##*=}; done ;;
    esac

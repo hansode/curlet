@@ -27,12 +27,12 @@ function test_add_param_key_z() {
 
 function test_add_param_key_n() {
   local name=i-xxx
-  assertEquals "name=${name}" "$(add_param name)"
+  assertEquals "name='${name}'" "$(add_param name)"
 }
 
 function test_add_param_key_string() {
   local name=i-xxx
-  assertEquals "name=${name}" "$(add_param name string)"
+  assertEquals "name='${name}'" "$(add_param name string)"
 }
 
 function test_add_param_key_array() {
@@ -47,7 +47,7 @@ function test_add_param_key_array_multi() {
 
 function test_add_param_key_strfile() {
   local name=i-xxx
-  assertEquals "name=${name}" "$(add_param name strfile)"
+  assertEquals "name='${name}'" "$(add_param name strfile)"
 }
 
 function test_add_param_key_strplain() {
