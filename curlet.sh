@@ -80,7 +80,7 @@ function base_uri() {
 }
 
 function data_type() {
-  echo --data # --data-urlencode
+  echo --data-urlencode
 }
 
 function urlencode_data() {
