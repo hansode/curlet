@@ -1,5 +1,9 @@
 # -*-Shell-script-*-
 #
+# requires:
+#  bash
+#  tr, egrep, sed, sort
+#
 
 COMMAND_PROMPT='$'
 COMMAND_ARGS=

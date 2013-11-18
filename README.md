@@ -8,8 +8,8 @@ Task-based Web API Client framework for Bash using Curl(1)
 Requirements
 ------------
 
-+ bash
-+ curl
++ [bash](http://www.gnu.org/software/bash/bash.html)
++ [curl](http://curl.haxx.se/)
 
 Curlet-based API Clients
 ------------------------
