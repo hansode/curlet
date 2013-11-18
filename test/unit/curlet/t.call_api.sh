@@ -13,7 +13,7 @@
 ## functions
 
 function setUp() {
-  function shlog() { echo $@; }
+  function shlog() { echo ${@}; }
   function curl_opts() { :; }
 }
 

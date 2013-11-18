@@ -12,8 +12,8 @@ COMMAND_FRONTEND=${COMMAND_FRONTEND:-noninteractive} # [ interactive | nonintera
 function extract_args() {
   COMMAND_ARGS=
   local __arg= __key= __value= __value2=
-  while [[ $# != 0 ]]; do
-    __arg=$1 __key= __value= __value2=
+  while [[ ${#} != 0 ]]; do
+    __arg=${1} __key= __value= __value2=
     case "${__arg}" in
     --*=*)
       __key=${__arg%%=*}; __key=${__key##--}; __key=${__key//-/_}
@@ -23,12 +23,12 @@ function extract_args() {
       ;;
     --*)
       __key=${__arg##--}; __key=${__key//-/_}
-      case "$2" in
+      case "${2}" in
       --*|"")
         eval "${__key}=1"
         ;;
       *)
-        __value="\${${__key}} $2"
+        __value="\${${__key}} ${2}"
         eval "${__key}=\"${__value}\""; __value="\${${__key}}"; __value=$(eval echo ${__value}); eval "${__key}=\"${__value## }\""
         shift
         ;;
@@ -51,7 +51,7 @@ function shlog() {
 
   case "${COMMAND_LOGLEVEL}" in
   debug)
-    echo "${COMMAND_PROMPT} $@"
+    echo "${COMMAND_PROMPT} ${@}"
     ;;
   *)
     ;;
@@ -62,7 +62,7 @@ function shlog() {
     :
    ;;
   *)
-    eval $@ </dev/stdin
+    eval ${@} </dev/stdin
     ;;
   esac
 }
@@ -76,7 +76,7 @@ function request_header() {
 }
 
 function request_param() {
-  echo $@
+  echo ${@}
 }
 
 function base_uri() {
@@ -111,7 +111,7 @@ function query_string() {
 }
 
 function strfile_type() {
-  local key=$1
+  local key=${1}
   [[ -n "${key}" ]] || { echo "[ERROR] 'key' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
 
   eval "
@@ -126,7 +126,7 @@ function strfile_type() {
 }
 
 function add_param() {
-  local param_key=$1 param_type=${2:-string}
+  local param_key=${1} param_type=${2:-string}
   [[ -n "${param_key}" ]] || { echo "[ERROR] 'param_key' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
 
   eval "
@@ -145,19 +145,19 @@ function add_param() {
 ## cmd_*
 
 function call_api() {
-  shlog curl $(curl_opts) $(request_param $@)
+  shlog curl $(curl_opts) $(request_param ${@})
 }
 
 ## tasklet
 
 function invoke_task() {
-  local namespace=$1 cmd=${2//-/_}
+  local namespace=${1} cmd=${2//-/_}
   [[ -n "${namespace}" ]] || { echo "[ERROR] 'namespace' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
   [[ -n "${cmd}"       ]] || { echo "[ERROR] 'cmd' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
 
   declare -f task_${cmd} >/dev/null || { echo "[ERROR] undefined task: 'task_${cmd}' (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
   shift; shift
-  eval task_${cmd} $@
+  eval task_${cmd} ${@}
 }
 
 task_help() {
@@ -175,7 +175,7 @@ function namespace_path() {
 }
 
 function run_cmd() {
-  local namespace=$1 cmd=$2
+  local namespace=${1} cmd=${2}
   [[ -n "${namespace}" ]] || { echo "[ERROR] 'namespace' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
   [[ -n "${cmd}"       ]] || { echo "[ERROR] 'cmd' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
 
@@ -186,7 +186,7 @@ function run_cmd() {
   }
 
   . ${namespace_path}
-  invoke_task $@
+  invoke_task ${@}
 }
 
 function rc_path() {

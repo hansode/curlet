@@ -14,7 +14,7 @@
 
 function test_rc_path_defined() {
   rc_path
-  assertEquals $? 0
+  assertEquals ${?} 0
 }
 
 function test_rc_path_undefined() {

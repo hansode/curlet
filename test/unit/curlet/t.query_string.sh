@@ -18,7 +18,7 @@ function setUp() {
 
 function test_query_string_no_opts() {
   query_string >/dev/null
-  assertEquals 0 $?
+  assertEquals 0 ${?}
 }
 
 function test_query_string_opts_single() {
