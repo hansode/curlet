@@ -15,28 +15,28 @@ function extract_args() {
   while [[ ${#} != 0 ]]; do
     __arg=${1} __key= __value= __value2=
     case "${__arg}" in
-    --*=*)
-      __key=${__arg%%=*}; __key=${__key##--}; __key=${__key//-/_}
-      __value2=${__arg##--*=}
-      __value="${__value} ${__value2}"
-      eval "${__key}=\"${__value}\""; __value="\${${__key}}"; __value=$(eval echo ${__value}); eval "${__key}=\"${__value## }\""
-      ;;
-    --*)
-      __key=${__arg##--}; __key=${__key//-/_}
-      case "${2}" in
-      --*|"")
-        eval "${__key}=1"
+      --*=*)
+        __key=${__arg%%=*}; __key=${__key##--}; __key=${__key//-/_}
+        __value2=${__arg##--*=}
+        __value="${__value} ${__value2}"
+        eval "${__key}=\"${__value}\""; __value="\${${__key}}"; __value=$(eval echo ${__value}); eval "${__key}=\"${__value## }\""
+        ;;
+      --*)
+        __key=${__arg##--}; __key=${__key//-/_}
+        case "${2}" in
+          --*|"")
+          eval "${__key}=1"
+          ;;
+        *)
+          __value="\${${__key}} ${2}"
+          eval "${__key}=\"${__value}\""; __value="\${${__key}}"; __value=$(eval echo ${__value}); eval "${__key}=\"${__value## }\""
+          shift
+          ;;
+        esac
         ;;
       *)
-        __value="\${${__key}} ${2}"
-        eval "${__key}=\"${__value}\""; __value="\${${__key}}"; __value=$(eval echo ${__value}); eval "${__key}=\"${__value## }\""
-        shift
+        COMMAND_ARGS="${COMMAND_ARGS} ${__arg}"
         ;;
-      esac
-      ;;
-    *)
-      COMMAND_ARGS="${COMMAND_ARGS} ${__arg}"
-      ;;
     esac
     shift
   done
@@ -50,20 +50,20 @@ function shlog() {
   COMMAND_DRY_RUN=$(echo ${COMMAND_DRY_RUN:-} | tr A-Z a-z)
 
   case "${COMMAND_LOGLEVEL}" in
-  debug)
-    echo "${COMMAND_PROMPT} ${@}"
-    ;;
-  *)
-    ;;
+    debug)
+      echo "${COMMAND_PROMPT} ${@}"
+      ;;
+    *)
+      ;;
   esac
 
   case "${COMMAND_DRY_RUN}" in
-  y|yes|on|1)
-    :
-   ;;
-  *)
-    eval ${@} </dev/stdin
-    ;;
+    y|yes|on|1)
+      :
+     ;;
+    *)
+      eval ${@} </dev/stdin
+      ;;
   esac
 }
 
@@ -133,11 +133,23 @@ function add_param() {
    [[ -n "\${${param_key}}" ]] || return 0
 
    case "${param_type}" in
-    string) echo ${param_key}=\'\${${param_key}}\' ;;
-     array) local i; for i in \${${param_key}}; do echo "${param_key}[]=\${i}"; done ;;
-   strfile) strfile_type \"${param_key}\" ;;
-  strplain) echo "\${${param_key}}" ;;
-      hash) local i; for i in \${${param_key}}; do echo \${param_key}[\${i%%=*}]=\${i##*=}; done ;;
+     string)
+       echo ${param_key}=\'\${${param_key}}\'
+       ;;
+     array)
+       local i
+       for i in \${${param_key}}; do echo "${param_key}[]=\${i}"; done
+       ;;
+     strfile)
+       strfile_type \"${param_key}\"
+       ;;
+     strplain)
+       echo "\${${param_key}}"
+       ;;
+     hash)
+       local i
+       for i in \${${param_key}}; do echo \${param_key}[\${i%%=*}]=\${i##*=}; done
+       ;;
    esac
   "
 }
