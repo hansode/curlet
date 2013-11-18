@@ -1,4 +1,4 @@
 all: test
 
 test:
-	for i in ./t.*; do $$i || exit; done
+	for i in ./t.*; do echo $$i; $$i || exit; done
