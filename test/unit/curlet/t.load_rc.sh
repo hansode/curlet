@@ -13,7 +13,7 @@
 ## functions
 
 function setUp() {
-  function rc_path() { echo ${BASH_SOURCE[0]%/*}/rc.$$; }
+  function rc_path() { echo ${BASH_SOURCE[0]%/*}/rc.${$}; }
 
   API_HOST=
   API_PORT=
@@ -33,7 +33,7 @@ function tearDown() {
 
 function test_load_rc() {
   load_rc
-  assertEquals 0 $?
+  assertEquals 0 ${?}
 
   assertEquals "${API_HOST}" "${api_host}"
   assertEquals "${API_PORT}" "${api_port}"
