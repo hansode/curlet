@@ -168,7 +168,7 @@ function invoke_task() {
   [[ -n "${cmd}"       ]] || { echo "[ERROR] 'cmd' is empty (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
 
   declare -f task_${cmd} >/dev/null || { echo "[ERROR] undefined task: 'task_${cmd}' (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
-  shift; shift
+  shift 2
   eval task_${cmd} ${@}
 }
 
