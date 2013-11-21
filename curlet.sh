@@ -12,7 +12,7 @@ COMMAND_FRONTEND=${COMMAND_FRONTEND:-noninteractive} # [ interactive | nonintera
 function extract_args() {
   COMMAND_ARGS=
   local __arg= __key= __value= __value2=
-  while [[ ${#} != 0 ]]; do
+  while [[ "${1}" ]]; do
     __arg=${1} __key= __value= __value2=
     case "${__arg}" in
       --*=*)
@@ -131,7 +131,9 @@ function add_param() {
 
   eval "
    [[ -n "\${${param_key}}" ]] || return 0
+  "
 
+  eval "
    case "${param_type}" in
      string)
        echo ${param_key}=\'\${${param_key}}\'
