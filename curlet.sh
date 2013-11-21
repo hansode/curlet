@@ -131,7 +131,9 @@ function add_param() {
 
   eval "
    [[ -n "\${${param_key}}" ]] || return 0
+  "
 
+  eval "
    case "${param_type}" in
      string)
        echo ${param_key}=\'\${${param_key}}\'
