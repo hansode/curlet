@@ -60,7 +60,7 @@ function shlog() {
   case "${COMMAND_DRY_RUN}" in
     y|yes|on|1)
       :
-     ;;
+      ;;
     *)
       eval ${@} </dev/stdin
       ;;
