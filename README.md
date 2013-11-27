@@ -18,6 +18,11 @@ Curlet-based API Clients
 + [github-bash](https://github.com/hansode/github-bash)
 + [zabbix-bash](https://github.com/hansode/zabbix-bash)
 
+Links
+-----
+
++ [shunit2-setup](https://github.com/hansode/shunit2-setup)
+
 License
 -------
 
