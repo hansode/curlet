@@ -8,7 +8,7 @@ Task-based Web API Client framework for Bash using Curl(1)
 Requirements
 ------------
 
-+ [bash](http://www.gnu.org/software/bash/bash.html)
++ [bash](http://www.gnu.org/software/bash/)
 + [curl](http://curl.haxx.se/)
 
 Curlet-based API Clients
@@ -17,6 +17,11 @@ Curlet-based API Clients
 + [hipchat-bash](https://github.com/hansode/hipchat-bash)
 + [github-bash](https://github.com/hansode/github-bash)
 + [zabbix-bash](https://github.com/hansode/zabbix-bash)
+
+Links
+-----
+
++ [shunit2-setup](https://github.com/hansode/shunit2-setup)
 
 License
 -------
